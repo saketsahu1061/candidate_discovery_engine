@@ -1,0 +1,25 @@
+# Python bytecode caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Massive Data and Submission Files
+*.csv
+*.json
+*.jsonl
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE & OS Metadata Configuration
+.vscode/
+.idea/
+.DS_Store
+
+India_runs_data_and_ai_challenge/

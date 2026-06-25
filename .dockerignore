@@ -1,0 +1,11 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+*.csv
+*.json
+*.jsonl
+.ipynb_checkpoints/
+EDA_and_Heuristics.ipynb
