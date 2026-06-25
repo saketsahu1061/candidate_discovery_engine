@@ -100,10 +100,6 @@ python main.py --input data/candidates_dataset.jsonl --count 100 --output final_
 * **Heuristic Scoring Engine:** Bypasses heavy GPU-reliant LLM processing to achieve instant scaling with completely auditable, zero-hallucination results.
 
 
-Here is the clean, copy-pasteable Docker Walkthrough section to add directly to your GitHub `README.md`:
-
-```markdown
----
 
 ## 🐳 Docker Containerization & Walkthrough
 
@@ -174,6 +170,4 @@ docker run -v ${PWD}/data:/app/data talent-pipeline python main.py --input data/
 
 ---
 
-```
 
-```
