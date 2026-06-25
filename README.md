@@ -106,25 +106,7 @@ python main.py --input data/candidates_dataset.jsonl --count 100 --output final_
 To ensure environmental consistency and bypass local python path issues, you can containerize the entire application using Docker.
 
 ### 1. Project Dockerfile
-Create a `Dockerfile` in the root directory of the project with the following configuration (includes the fix for container module resolution):
-
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Install system dependencies and python packages
-RUN pip install --no-cache-dir pandas streamlit
-
-# Set Python Path so the container safely resolves internal 'src' imports
-ENV PYTHONPATH=/app
-
-# Copy project files into the container working directory
-COPY . .
-
-EXPOSE 8501
-
-```
+Make sure you have cloned the docker file from repo 
 
 ### 2. Build the Image
 
