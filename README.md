@@ -98,3 +98,82 @@ python main.py --input data/candidates_dataset.jsonl --count 100 --output final_
 * **Python & Pandas:** Chosen to enable vectorized array-mapping, eliminating slow row-by-row loops for fast execution.
 * **Streamlit Framework:** Selected to deploy a zero-cost local interactive layout with minimal infrastructure overhead.
 * **Heuristic Scoring Engine:** Bypasses heavy GPU-reliant LLM processing to achieve instant scaling with completely auditable, zero-hallucination results.
+
+
+Here is the clean, copy-pasteable Docker Walkthrough section to add directly to your GitHub `README.md`:
+
+```markdown
+---
+
+## 🐳 Docker Containerization & Walkthrough
+
+To ensure environmental consistency and bypass local python path issues, you can containerize the entire application using Docker.
+
+### 1. Project Dockerfile
+Create a `Dockerfile` in the root directory of the project with the following configuration (includes the fix for container module resolution):
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies and python packages
+RUN pip install --no-cache-dir pandas streamlit
+
+# Set Python Path so the container safely resolves internal 'src' imports
+ENV PYTHONPATH=/app
+
+# Copy project files into the container working directory
+COPY . .
+
+EXPOSE 8501
+
+```
+
+### 2. Build the Image
+
+Open your terminal in the project root directory and execute the build command:
+
+```bash
+docker build -t talent-pipeline .
+
+```
+
+### 3. Run the Containerized Ecosystem
+
+Depending on your execution requirements, choose one of the two container modes below:
+
+#### Option A: Spin Up the Interactive Web UI Dashboard
+
+This maps container port 8501 to your local host machine, allowing you to access the dashboard via your browser.
+
+```bash
+docker run -p 8501:8501 talent-pipeline streamlit run app.py
+
+```
+
+* Once running, open your browser and navigate to: **`http://localhost:8501`**
+
+#### Option B: Execute the Headless CLI (Batch Processing)
+
+This uses volume mounting (`-v`) to bind your local `data/` folder inside the container workspace. This allows the docker container to read your local datasets and write the output files back to your local host.
+
+**On Linux/macOS:**
+
+```bash
+docker run -v $(pwd)/data:/app/data talent-pipeline python main.py --input data/candidates_dataset.jsonl --count 100
+
+```
+
+**On Windows (PowerShell):**
+
+```bash
+docker run -v ${PWD}/data:/app/data talent-pipeline python main.py --input data/candidates_dataset.jsonl --count 100
+
+```
+
+---
+
+```
+
+```
